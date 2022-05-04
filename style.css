@@ -1,0 +1,102 @@
+/* General styles */
+
+html {
+    font-family: 'Helvetica neue', Arial, 'sans serif';
+    font-size: 10px;
+}
+  
+body {
+    width: 90em;
+    margin: 0 auto;
+}
+
+
+/* Typography */
+
+h1 {
+    font-size: 4em;
+}
+
+h2 {
+    font-size: 3.2em;
+}
+
+h3 {
+    font-size: 2.5em;
+}
+
+h4 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.5em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    font-size: 1.4em;
+}
+
+a:link {
+    color: blue;
+}
+
+a:visited {
+    color: blueviolet;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/*Specific styles */
+
+header {
+    border-bottom: solid 1px black;
+    margin-bottom: 2em;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    flex: 0.7;
+    background-color: bisque;
+}
+
+.nav {
+    flex: 0.3;
+    margin: 0 2em;
+}
+
+/* .nav-search {
+} */
+.nav-section {
+    background-color: #cfd1fa;
+    padding: 1em 0 1em 0;
+    margin-top: 3em;
+}
+
+.nav-section > p {
+    font-weight: 600;
+    padding-left: 1em;
+}
+
+footer {
+    margin-top: 3em;
+    border-top: solid 1px black;
+    background-color: bisque;
+}
+
+footer > P {
+    margin-bottom: 0;
+}
+
+
+
