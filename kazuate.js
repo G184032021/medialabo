@@ -16,7 +16,7 @@ let user_click = 0;
 // hantei();
 
 // ボタンを押した後の処理をする関数 hantei() の定義
-function hantei() {
+function hantei(event) {
     let yoso = document.querySelector('input').valueAsNumber;
     console.log(yoso);       // 第5回課題:テキストボックスの数値をここに代入
     // 課題3-1：ここの判定処理を作成する．
@@ -38,12 +38,13 @@ function hantei() {
         result = '答えは' + kotae + 'でした．すでにゲームは終わっています';
     }
     let p_result = document.querySelector('p#result');
-    p_result.textContent(result);
+    p_result.textContent = result;
         //    ページに表示する方法はまだ習っていないので
     //        判定結果はコンソールに出力すること
 
     let p_answer = document.querySelector('p#answer');
     p_answer.textContent = kotae;
+    event.preventDefault();
 }
 document.querySelector('form').addEventListener('submit', hantei);
 
