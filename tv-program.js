@@ -80,7 +80,6 @@ let data = {
 };
 
 /////////////////// 課題3-2 はここから書き始めよう
-
-Object.keys(data).forEach(e => {
+data.list.g1.forEach(e => {
   console.log(e.title);
 });
