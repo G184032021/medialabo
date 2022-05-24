@@ -2,6 +2,41 @@ p {
     margin: 0;
 }
 
+main {
+    display: flex;
+    flex-direction: row;
+    padding: 1em 3em;
+}
+
+a{
+    text-decoration: none;
+    color: #1f1f20;
+    /* padding: 0.5em 0.5em; */
+    width: 2em;
+}
+
+a:hover{
+    background-color: #1f1f20;
+    color: #fafafa;
+}
+
+.navbar {
+    flex: 0.2;
+}
+
+.content {
+    flex: 0.8;
+}
+
+.navbar > ul {
+    list-style-type: none;
+}
+
+.block-display {
+    display: block;
+    margin-bottom: 1em;
+}
+
 .header {
     display: flex;
     flex-direction: row;

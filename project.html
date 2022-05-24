@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <title>NHKの番組表</title>
         <link rel="stylesheet" href="project-style.css">
+        <script src="tv-program.js"></script>
     </head>
     <body>
         <header>
             <div class="header">
-                <p>NHK番組</p>
+                <h1>NHK番組</h1>
                 <form class="header-searchBar">
                     <input type="text" placeholder="番組検索">
                     <button>検索</button>
@@ -16,44 +17,62 @@
             </div>
         </header>
         <main>
-            <table border="0" align="center" cellspacing="10">
-                <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                    <th>Start</th>
-                    <th>End</th>
-                </tr>
-                <tr>
-                    <th>Master Chef</th>
-                    <th>Variety</th>
-                    <th>8:00 pm</th>
-                    <th>9:00 pm</th>
-                </tr>
-                <tr>
-                    <th>Morning News</th>
-                    <th>News</th>
-                    <th>7:00 am</th>
-                    <th>7:30 am</th>
-                </tr>
-                <tr>
-                    <th>Doraemon</th>
-                    <th>Animation</th>
-                    <th>7:30 pm</th>
-                    <th>8:00 pm</th>
-                </tr>
-                <tr>
-                    <th>La La Land</th>
-                    <th>Movie</th>
-                    <th>9:00 pm</th>
-                    <th>11:00 pm</th>
-                </tr>
-                <tr>
-                    <th>24/7</th>
-                    <th>Sport</th>
-                    <th>7:15 pm</th>
-                    <th>7:30 pm</th>
-                </tr>
-            </table>
+            <div class="navbar">
+                <ul>
+                    <ls class="block-display">
+                        <a href="">ドラマ</a>
+                    </ls>
+                    <ls class="block-display">
+                        <a href="">映画</a>
+                    </ls>
+                    <ls class="block-display">
+                        <a href="">アニメ</a>
+                    </ls>
+                    <ls class="block-display">
+                        <a href="">音楽</a>
+                    </ls>
+                </ul>
+            </div>
+            <div class="content">
+                <table border="0" align="center" cellspacing="10">
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                    <tr>
+                        <th>Master Chef</th>
+                        <th>Variety</th>
+                        <th>8:00 pm</th>
+                        <th>9:00 pm</th>
+                    </tr>
+                    <tr>
+                        <th>Morning News</th>
+                        <th>News</th>
+                        <th>7:00 am</th>
+                        <th>7:30 am</th>
+                    </tr>
+                    <tr>
+                        <th>Doraemon</th>
+                        <th>Animation</th>
+                        <th>7:30 pm</th>
+                        <th>8:00 pm</th>
+                    </tr>
+                    <tr>
+                        <th>La La Land</th>
+                        <th>Movie</th>
+                        <th>9:00 pm</th>
+                        <th>11:00 pm</th>
+                    </tr>
+                    <tr>
+                        <th>24/7</th>
+                        <th>Sport</th>
+                        <th>7:15 pm</th>
+                        <th>7:30 pm</th>
+                    </tr>
+                </table>
+            </div>
         </main>
 
         <footer>
