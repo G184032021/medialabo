@@ -11,10 +11,11 @@
     <p>第5回課題でテキストボックスとボタンを設置します．</p>
     <p id="turn">4ターンあります。</p>
     <form class="form">
-      <input placeholder="1~10の数字を入力してください" type="text" size="25">
-      <button>Guess</button>
+      <label for="number">1~10の整数:</label>
+      <input type="number" min="1" max="10" size="15">
+      <button>回答</button>
     </form>
-    <p id="answer">予想: </p>
+    <p id="answer"></p>
     <p id="result">第4回課題で結果を表示します</p>
   </body>
 </html>

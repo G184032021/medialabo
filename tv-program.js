@@ -80,6 +80,14 @@ let data = {
 };
 
 /////////////////// 課題3-2 はここから書き始めよう
+// setInterval(() =>{
+//   let new_show_img = document.getElementsByClassName('new-show-img');
+  
+// },5000);
+let testabc = document.querySelector('p#testabc');
+console.log('hello');
+setInterval(a, 5000);
+setInterval(b, 2500);
 let handled_data ={
   title: [],
   genres_number:[],
@@ -94,6 +102,14 @@ data.list.g1.forEach((e,ei) => {
 });
 
 console.log('check' + handled_data.title[0])
+
+function a(){
+  console.log('a');
+
+}
+function b(){
+  console.log('b');
+}
 
 // document.querySelector('p#new-show1').textContent = handled_data.title[0];
 // document.querySelector('p#new-show2').textContent = handled_data.title[1];

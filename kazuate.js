@@ -22,7 +22,7 @@ function hantei(event) {
     // 課題3-1：ここの判定処理を作成する．
     let result = '';
     user_click++;
-    if (user_click <= kaisu){
+    if (user_click < kaisu){
         console.log(user_click + '回目の予想：' + yoso);
         if (yoso === kotae) {
             console.log('正解です。おめでとう！');
@@ -41,12 +41,12 @@ function hantei(event) {
     p_result.textContent = result;
     if(kaisu-user_click>=0){
         document.querySelector('p#turn').textContent = `${kaisu-user_click} 回残り`;
+        let p_answer = document.querySelector('p#answer');
+        p_answer.textContent = user_click + "回目の予想：" + yoso;
     }
         //    ページに表示する方法はまだ習っていないので
     //        判定結果はコンソールに出力すること
 
-    let p_answer = document.querySelector('p#answer');
-    p_answer.textContent = "予想：" + yoso;
     event.preventDefault();
 }
 document.querySelector('form').addEventListener('submit', hantei);
