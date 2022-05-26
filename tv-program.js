@@ -80,6 +80,43 @@ let data = {
 };
 
 /////////////////// 課題3-2 はここから書き始めよう
-data.list.g1.forEach(e => {
+let handled_data ={
+  title: [],
+  genres_number:[],
+  start_time:[],
+  end_time:[],
+}
+
+data.list.g1.forEach((e,ei) => {
   console.log(e.title);
+  handled_data.title[ei] = e.title
+
 });
+
+console.log('check' + handled_data.title[0])
+
+// document.querySelector('p#new-show1').textContent = handled_data.title[0];
+// document.querySelector('p#new-show2').textContent = handled_data.title[1];
+
+// let table = document.getElementsByTagName('table');
+// let tableca = table[0];
+// for(let i =0; i < handled_data.title.length; i++){
+//   let new_tr = document.createElement('tr');
+//   let new_td1 = document.createElement('td');
+//   let new_td2 = document.createElement('td');
+//   let new_td3 = document.createElement('td');
+//   let new_td4 = document.createElement('td');
+
+//   let text1 = document.createTextNode(handled_data.title[i]);
+//   let text2 = document.createTextNode('text2');
+//   let text3 = document.createTextNode('text3');
+//   let text4 = document.createTextNode('text4');
+
+//   new_td1.appendChild(text1);
+//   new_td2.appendChild(text2);
+//   new_td3.appendChild(text3);
+//   new_td4.appendChild(text4);
+
+//   // tableca.appendChild(new_tr);
+
+// }
