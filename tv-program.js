@@ -77,13 +77,65 @@ let data = {
       }
     ]
   }
-};
+}; 
 
 /////////////////// 課題3-2 はここから書き始めよう
-// setInterval(() =>{
-//   let new_show_img = document.getElementsByClassName('new-show-img');
-  
-// },5000);
+//REQUEST
+let genre = '';
+
+function sendRequest() {
+	// URL を設定
+	let url = `https://www.nishita-lab.org/web-contents/jsons/nhk/${service}-${genre}-j.json`;
+
+	// 通信開始
+	axios.get(url)
+		.then(showResult)
+		.catch(showError)
+		.then(finish);
+}
+
+// 通信が成功した時の処理
+function showResult(resp) {
+	// サーバから送られてきたデータを出力
+	let data = resp.data;
+
+	// data が文字列型なら，オブジェクトに変換する
+	if (typeof data === 'string') {
+		data = JSON.parse(data);
+	}
+
+	// data をコンソールに出力
+	console.log(data);
+}
+
+// 通信エラーが発生した時の処理
+function showError(err) {
+	console.log(err);
+}	
+
+// 通信の最後にいつも実行する処理
+function finish() {
+	console.log('Ajax 通信が終わりました');
+}
+
+//switch-case: genre
+switch (genre) {
+  case '0000':
+    genre = 'ニュース';
+    break;
+  case '0300':
+    genre = 'ドラマ';
+    break;
+  case '0600':
+    genre = '映画';
+    break;
+  case '0700':
+    genre = 'アニメ';
+    break;
+  default:
+    break;
+}
+
 let testabc = document.querySelector('p#testabc');
 console.log('hello');
 setInterval(a, 5000);
