@@ -49,6 +49,7 @@ function hantei(event) {
 
     event.preventDefault();
 }
+
 document.querySelector('form').addEventListener('submit', hantei);
 
 

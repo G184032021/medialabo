@@ -81,23 +81,30 @@ let data = {
 
 /////////////////// 課題3-2 はここから書き始めよう
 //REQUEST
-let genre = '';
-
-function sendRequest() {
+function sendRequest(service,genre) {
 	// URL を設定
 	let url = `https://www.nishita-lab.org/web-contents/jsons/nhk/${service}-${genre}-j.json`;
 
 	// 通信開始
-	axios.get(url)
-		.then(showResult)
-		.catch(showError)
-		.then(finish);
+	// axios.get(url)
+	// 	.then(showResult)
+	// 	.catch(showError)
+	// 	.then(finish);
+
+  let get_api_data = async () => {
+    const res = await axios.get(url)
+    console.log(res.data.list);
+    return res.data.list;
+  }
+  let data = get_api_data();
+  return data;
+
 }
 
 // 通信が成功した時の処理
 function showResult(resp) {
 	// サーバから送られてきたデータを出力
-	let data = resp.data;
+	let data = resp.data.list;
 
 	// data が文字列型なら，オブジェクトに変換する
 	if (typeof data === 'string') {
@@ -106,6 +113,7 @@ function showResult(resp) {
 
 	// data をコンソールに出力
 	console.log(data);
+  return data;
 }
 
 // 通信エラーが発生した時の処理
@@ -118,73 +126,192 @@ function finish() {
 	console.log('Ajax 通信が終わりました');
 }
 
-//switch-case: genre
-switch (genre) {
-  case '0000':
-    genre = 'ニュース';
-    break;
-  case '0300':
-    genre = 'ドラマ';
-    break;
-  case '0600':
-    genre = '映画';
-    break;
-  case '0700':
-    genre = 'アニメ';
-    break;
-  default:
-    break;
+
+function handleSearch(event) {
+  let user_input = '';
+  user_input = document.querySelector('input#search-input').value;
+  console.log(user_input);
+  let setKey = switchCaseForUserInput(user_input);
+  console.log('genre is ' + setKey.genre + '. service is ' + setKey.service);
+
+  if(setKey.genre.length === 1){
+    for(let i=0; i<setKey.service.length; i++){
+      sendRequest(setKey.service[i],setKey.genre);
+    }
+  }else{
+    for(let i=0; i<setKey.genre.length;i++){
+      sendRequest(setKey.service,setKey.genre[i]);
+    }
+  }
+  let display_result_indow = window.open('./display-result.html','displayDataWindow','width=700,height=700');
+  
+
+  // sendRequest(setKey.service,setKey.genre);
+  event.preventDefault();
 }
 
-let testabc = document.querySelector('p#testabc');
-console.log('hello');
-setInterval(a, 5000);
-setInterval(b, 2500);
-let handled_data ={
-  title: [],
-  genres_number:[],
-  start_time:[],
-  end_time:[],
+function createTable(genre){
+  let genre_number = switchCaseForUserInput(genre).genre[0];
+  let table = document.querySelector('table#table');
+  let thead = document.createElement('thead');
+  let tbody = document.createElement('tbody');
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  let row_1 = document.createElement('tr');
+  let heading_1 = document.createElement('th');
+  heading_1.innerHTML = '番組'
+  let heading_2 = document.createElement('th');
+  heading_2.innerHTML = "ジャンル";
+  let heading_3 = document.createElement('th');
+  heading_3.innerHTML = "チャンネル";
+  let heading_4 = document.createElement('th');
+  heading_4.innerHTML = "開始";
+  let heading_5 = document.createElement('th');
+  heading_5.innerHTML = "終了";
+
+  row_1.appendChild(heading_1);
+  row_1.appendChild(heading_2);
+  row_1.appendChild(heading_3);
+  row_1.appendChild(heading_4);
+  row_1.appendChild(heading_5);
+  thead.appendChild(row_1);
+  async function get_api_data() {
+	  let url_g1 = `https://www.nishita-lab.org/web-contents/jsons/nhk/g1-${genre_number}-j.json`;
+    const res_g1 = await axios.get(url_g1);
+    console.log(res_g1);
+    for(let i=0; i<res_g1.data.list.g1.length; i++){
+      let row_i = document.createElement('tr');
+      let row_i_show_i = document.createElement('td');
+      let row_i_genre_i = document.createElement('td');
+      let row_i_channel_i = document.createElement('td');
+      let row_i_start_i = document.createElement('td');
+      let row_i_end_i = document.createElement('td');
+      row_i_show_i.innerHTML = res_g1.data.list.g1[i].title;
+      row_i_genre_i.innerHTML = genre;
+      row_i_channel_i.innerHTML = 'ＮＨＫ総合１';
+      row_i_start_i.innerHTML = res_g1.data.list.g1[i].start_time;
+      row_i_end_i.innerHTML = res_g1.data.list.g1[i].end_time;
+  
+      row_i.appendChild(row_i_show_i);
+      row_i.appendChild(row_i_genre_i);
+      row_i.appendChild(row_i_channel_i);
+      row_i.appendChild(row_i_start_i);
+      row_i.appendChild(row_i_end_i);
+      tbody.appendChild(row_i);
+    }
+	  let url_e1 = `https://www.nishita-lab.org/web-contents/jsons/nhk/e1-${genre_number}-j.json`;
+    const res_e1 = await axios.get(url_e1);
+    console.log(res_e1);
+    for(let i=0; i<res_e1.data.list.e1.length; i++){
+      let row_i = document.createElement('tr');
+      let row_i_show_i = document.createElement('td');
+      let row_i_genre_i = document.createElement('td');
+      let row_i_channel_i = document.createElement('td');
+      let row_i_start_i = document.createElement('td');
+      let row_i_end_i = document.createElement('td');
+      row_i_show_i.innerHTML = res_e1.data.list.e1[i].title;
+      row_i_genre_i.innerHTML = genre;
+      row_i_channel_i.innerHTML = 'ＮＨＫＥテレ１';
+      row_i_start_i.innerHTML = res_e1.data.list.e1[i].start_time;
+      row_i_end_i.innerHTML = res_e1.data.list.e1[i].end_time;
+  
+      row_i.appendChild(row_i_show_i);
+      row_i.appendChild(row_i_genre_i);
+      row_i.appendChild(row_i_channel_i);
+      row_i.appendChild(row_i_start_i);
+      row_i.appendChild(row_i_end_i);
+      tbody.appendChild(row_i);
+    }
+
+  }
+  get_api_data();
+  
 }
 
-data.list.g1.forEach((e,ei) => {
-  console.log(e.title);
-  handled_data.title[ei] = e.title
-
-});
-
-console.log('check' + handled_data.title[0])
-
-function a(){
-  console.log('a');
-
+function handleClickNews(event) {
+  document.getElementById('new-show').remove();
+  createTable('ニュース');
+  event.preventDefault();
 }
-function b(){
-  console.log('b');
+function handleClickDrama(event) {
+  document.getElementById('new-show').remove();
+  createTable('ドラマ');
+  event.preventDefault();
+}
+function handleClickMovie(event) {
+  document.getElementById('new-show').remove();
+  createTable('映画');
+  event.preventDefault();
+}
+function handleClickAnimation(event) {
+  document.getElementById('new-show').remove();
+  createTable('アニメ');
+  event.preventDefault();
+}
+function handleClickMusic(event) {
+  document.getElementById('new-show').remove();
+  createTable('音楽');
+  event.preventDefault();
 }
 
-// document.querySelector('p#new-show1').textContent = handled_data.title[0];
-// document.querySelector('p#new-show2').textContent = handled_data.title[1];
 
-// let table = document.getElementsByTagName('table');
-// let tableca = table[0];
-// for(let i =0; i < handled_data.title.length; i++){
-//   let new_tr = document.createElement('tr');
-//   let new_td1 = document.createElement('td');
-//   let new_td2 = document.createElement('td');
-//   let new_td3 = document.createElement('td');
-//   let new_td4 = document.createElement('td');
+document.querySelector('form#header-searchBar').addEventListener('submit', handleSearch);
+document.querySelector('ls#news').addEventListener('click',handleClickNews);
+document.querySelector('ls#drama').addEventListener('click',handleClickDrama);
+document.querySelector('ls#movie').addEventListener('click',handleClickMovie);
+document.querySelector('ls#animation').addEventListener('click',handleClickAnimation);
+document.querySelector('ls#music').addEventListener('click',handleClickMusic);
 
-//   let text1 = document.createTextNode(handled_data.title[i]);
-//   let text2 = document.createTextNode('text2');
-//   let text3 = document.createTextNode('text3');
-//   let text4 = document.createTextNode('text4');
+//switch-case: user_input
+function switchCaseForUserInput(x){
+  let setKey = {
+    genre: [],
+    service: [],
+  }
+  switch (x) {
+    //genre
+    case 'ニュース':
+      setKey.genre = ['0000'];
+      setKey.service = ['g1','e1'];
+      break;
+    case 'ドラマ':
+      setKey.genre = ['0300'];
+      setKey.service = ['g1','e1'];
+      break;
+    case '映画':
+      setKey.genre = ['0600'];
+      setKey.service = ['g1','e1'];
+      break;
+    case 'アニメ':
+      setKey.genre = ['0700'];
+      setKey.service = ['g1','e1'];
+      break;
+    case '音楽':
+      setKey.genre = ['0409'];
+      setKey.service = ['g1','e1'];
+    //channel
+    case 'ＮＨＫ総合１':
+      setKey.service = ['g1'];
+      setKey.genre = ['0000','0300','0600','0700'];
+      break;
+    case 'ＮＨＫＥテレ１':
+      setKey.service = ['e1'];
+      setKey.genre = ['0000','0300','0600','0700'];
+      break;
+    default:
+      break;
+  }
+  return setKey;
+}
 
-//   new_td1.appendChild(text1);
-//   new_td2.appendChild(text2);
-//   new_td3.appendChild(text3);
-//   new_td4.appendChild(text4);
+setTimeout(()=>{
+  console.log('HELLO A');
+  document.getElementById('target_1').classList.contains('display-none');
+  document.getElementById('target_2').classList.remove('display-none');
+},3000);
 
-//   // tableca.appendChild(new_tr);
-
-// }
+setTimeout(()=>{
+  console.log('HELLO B');
+  document.getElementById('target_2').classList.add('display-none');
+  document.getElementById('target_1').classList.remove('display-none');
+},6000);
